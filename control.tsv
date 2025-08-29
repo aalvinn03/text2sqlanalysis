@@ -1,0 +1,100 @@
+SELECT COUNT(*) FROM head WHERE age > 56	department_management
+SELECT head.name, head.born_state, head.age FROM head JOIN management ON head.head_id = management.head_id ORDER BY head.age	department_management
+SELECT creation, name, budget in billions FROM department	department_management
+SELECT MAX(`budget in billions`), MIN(`budget in billions`) FROM department	department_management
+SELECT AVG(`num employees`) FROM department WHERE ranking BETWEEN 10 AND 15	department_management
+SELECT head.name  FROM head  WHERE head.born_state != 'California'	department_management
+SELECT DISTINCT department.creation  FROM department  JOIN management ON department.department id = management.department id  JOIN head ON management.head id = head.head id  WHERE head.born state = 'Alabama'	department_management
+SELECT born_state  FROM head  GROUP BY born_state  HAVING COUNT(*) >= 3	department_management
+SELECT creation  FROM department  GROUP BY creation  ORDER BY COUNT(*) DESC  LIMIT 1	department_management
+SELECT department.name, department.num employees FROM department JOIN management ON department.department id = management.department id JOIN head ON management.head id = head.head id WHERE management.temporary acting = 'Yes'	department_management
+SELECT COUNT(DISTINCT temporary_acting) FROM management	department_management
+SELECT COUNT(*) FROM department WHERE department.id NOT IN (SELECT management.department_id FROM management)	department_management
+SELECT DISTINCT head.age  FROM head  JOIN management ON head.head id = management.head id  WHERE management.temporary acting = 'yes'	department_management
+SELECT head.born_state  FROM head  JOIN management ON head.head_id = management.head_id  JOIN department ON management.department_id = department.department_id  WHERE department.name IN ('Treasury', 'Homeland Security')  GROUP BY head.born_state  HAVING COUNT(DISTINCT department.name) = 2	department_management
+SELECT department.id, department.name, COUNT(management.head_id) as num_heads FROM department JOIN management ON department.id = management.department_id GROUP BY department.id, department.name HAVING COUNT(management.head_id) > 1	department_management
+SELECT head.id, head.name FROM head WHERE head.name LIKE '%Ha%'	department_management
+SELECT COUNT(*) FROM farm	farm
+SELECT COUNT(*) FROM farm	farm
+SELECT total_horses FROM farm ORDER BY total_horses ASC	farm
+SELECT `farm id`, SUM(`total horses`) FROM farm GROUP BY `farm id` ORDER BY SUM(`total horses`) ASC	farm
+"SELECT hosts FROM farm_competition WHERE theme != ""Aliens"""	farm
+SELECT hosts FROM farm_competition WHERE theme != 'Aliens'	farm
+SELECT theme, year FROM farm_competition ORDER BY year ASC	farm
+SELECT theme  FROM farm_competition  ORDER BY year ASC	farm
+SELECT AVG(working_horses)  FROM farm  WHERE total_horses > 5000	farm
+SELECT AVG(working_horses)  FROM farm  WHERE total_horses > 5000	farm
+SELECT MAX(cows), MIN(cows) FROM farm	farm
+SELECT MAX(cows), MIN(cows) FROM farm	farm
+SELECT COUNT(DISTINCT status) FROM city	farm
+SELECT COUNT(DISTINCT status) FROM city	farm
+SELECT official name FROM city ORDER BY population DESC	farm
+SELECT official name FROM city ORDER BY population DESC	farm
+SELECT official name, status FROM city ORDER BY population DESC LIMIT 1	farm
+SELECT official name, status FROM city WHERE population = (SELECT MAX(population) FROM city)	farm
+SELECT farm_competition.year, city.official_name  FROM farm_competition  JOIN city ON farm_competition.host_city_id = city.city_id	farm
+SELECT farm_competition.year, city.official_name  FROM farm_competition  JOIN city ON farm_competition.host_city_id = city.city_id	farm
+SELECT `official name` FROM city WHERE `city id` IN (     SELECT `host city id`     FROM `farm competition`     GROUP BY `host city id`     HAVING COUNT(`competition id`) > 1 )	farm
+"SELECT city.""official name"" FROM city JOIN farm_competition ON city.""city id"" = farm_competition.""host city id"" GROUP BY city.""official name"" HAVING COUNT(farm_competition.""competition id"") > 1"	farm
+SELECT city.status  FROM city  JOIN farm_competition ON city.city_id = farm_competition.host_city_id  GROUP BY city.city_id  ORDER BY COUNT(farm_competition.competition_id) DESC  LIMIT 1	farm
+SELECT status FROM city WHERE city id = (SELECT host city id FROM farm competition GROUP BY host city id ORDER BY COUNT(*) DESC LIMIT 1)	farm
+SELECT theme  FROM farm_competition  WHERE host_city_id IN (   SELECT city_id    FROM city    WHERE population > 1000)	farm
+SELECT DISTINCT `farm competition`.theme FROM `farm competition` JOIN city ON `farm competition`.`host city id` = city.`city id` WHERE city.population > 1000	farm
+SELECT status, AVG(population)  FROM city  GROUP BY status	farm
+SELECT status, AVG(population)  FROM city  GROUP BY status	farm
+SELECT status, COUNT(*) as num_cities FROM city GROUP BY status ORDER BY num_cities DESC	farm
+SELECT status, COUNT(*) as frequency  FROM city  GROUP BY status  ORDER BY frequency ASC	farm
+SELECT status, COUNT(*) as count  FROM city  GROUP BY status  ORDER BY count DESC  LIMIT 1;	farm
+SELECT status, COUNT(*) as count  FROM city  GROUP BY status  ORDER BY count DESC  LIMIT 1	farm
+SELECT official name FROM city WHERE city id NOT IN (SELECT host city id FROM farm competition)	farm
+SELECT official name FROM city WHERE city id NOT IN (SELECT host city id FROM farm competition)	farm
+SELECT status FROM city WHERE population > 1500 OR population < 500	farm
+SELECT DISTINCT status  FROM city  WHERE population > 1500 OR population < 500	farm
+SELECT official name FROM city WHERE population > 1500 OR population < 500	farm
+SELECT official name FROM city WHERE population > 1500 OR population < 500	farm
+"SELECT `census ranking` FROM city WHERE status != ""Village"""	farm
+"SELECT `city id`, `census ranking` FROM city WHERE status != ""Village"""	farm
+SELECT `course_id`  FROM `student course registrations`  GROUP BY `course_id`  ORDER BY COUNT(`student_id`) DESC  LIMIT 1	student_assessment
+SELECT `course name` FROM `courses` WHERE `course id` = (   SELECT `course id`   FROM `student course registrations`   GROUP BY `course id`   ORDER BY COUNT(`student id`) DESC   LIMIT 1 )	student_assessment
+SELECT student_id  FROM student_course_registrations  GROUP BY student_id  HAVING COUNT(course_id) = (   SELECT MIN(course_count)    FROM (     SELECT COUNT(course_id) as course_count      FROM student_course_registrations      GROUP BY student_id   ) )	student_assessment
+SELECT student_id  FROM student_course_registrations  GROUP BY student_id  HAVING COUNT(course_id) = (SELECT MIN(course_count)                             FROM (SELECT COUNT(course_id) as course_count                                   FROM student_course_registrations                                   GROUP BY student_id))	student_assessment
+SELECT people.first_name, people.last_name  FROM people  JOIN candidates ON people.person_id = candidates.candidate_id	student_assessment
+SELECT first_name, last_name FROM people WHERE person_id IN (SELECT candidate_id FROM candidates)	student_assessment
+SELECT `student id`  FROM students  WHERE `student id` NOT IN (SELECT `student id` FROM `student course attendance`)	student_assessment
+"SELECT ""student id""  FROM students  WHERE ""student id"" NOT IN (SELECT ""student id"" FROM ""student course attendance"")"	student_assessment
+"SELECT DISTINCT ""student id"" FROM ""student course attendance"""	student_assessment
+"SELECT DISTINCT ""student id"" FROM ""student course attendance"""	student_assessment
+SELECT student_id, course_name  FROM student_course_registrations  JOIN courses ON student_course_registrations.course_id = courses.course_id	student_assessment
+SELECT students.student_details  FROM students  JOIN student_course_registrations ON students.student_id = student_course_registrations.student_id  ORDER BY student_course_registrations.registration_date DESC  LIMIT 1	student_assessment
+SELECT *  FROM students  JOIN student_course_registrations ON students.student_id = student_course_registrations.student_id  ORDER BY student_course_registrations.registration_date DESC	student_assessment
+SELECT COUNT(*)  FROM students  JOIN student_course_registrations ON students.student_id = student_course_registrations.student_id  JOIN courses ON student_course_registrations.course_id = courses.course_id  WHERE courses.course_name = 'English'	student_assessment
+SELECT COUNT(DISTINCT student_id)  FROM student_course_attendance  WHERE course_id IN (   SELECT course_id    FROM courses    WHERE course_name LIKE '%English%' )	student_assessment
+SELECT COUNT(*) FROM `student course attendance` WHERE `student id` = 171	student_assessment
+"SELECT COUNT(*)  FROM ""student course attendance""  WHERE ""student id"" = 171"	student_assessment
+SELECT person_id FROM people WHERE email_address = 'stanley.monahan@example.org'	student_assessment
+SELECT person_id FROM people WHERE email_address = 'stanley.monahan@example.org'	student_assessment
+"SELECT ""candidate id"" FROM ""candidate assessments"" ORDER BY ""assessment date"" DESC LIMIT 1"	student_assessment
+"SELECT ""candidate id""  FROM ""candidate assessments""  ORDER BY ""assessment date"" DESC  LIMIT 1"	student_assessment
+SELECT students.student_details FROM students JOIN student_course_registrations ON students.student_id = student_course_registrations.student_id GROUP BY students.student_id ORDER BY COUNT(student_course_registrations.course_id) DESC LIMIT 1	student_assessment
+SELECT s.student_details  FROM students s  JOIN student_course_registrations scr ON s.student_id = scr.student_id  GROUP BY s.student_id  ORDER BY COUNT(scr.course_id) DESC  LIMIT 1	student_assessment
+SELECT `student id`, COUNT(`course id`)  FROM `student course registrations`  GROUP BY `student id`	student_assessment
+SELECT `student_id`, COUNT(`course_id`)  FROM `student course registrations`  GROUP BY `student_id`	student_assessment
+SELECT `course name`, COUNT(`student id`)  FROM `courses`  JOIN `student course registrations` ON `courses`.`course id` = `student course registrations`.`course id`  GROUP BY `course name`	student_assessment
+SELECT `course id`, COUNT(`student id`) as `number of students`, `course name` FROM `student course registrations`  JOIN `courses` ON `student course registrations`.`course id` = `courses`.`course id` GROUP BY `course id`, `course name`	student_assessment
+"SELECT candidate_id FROM candidate_assessments WHERE asessment_outcome_code = ""Pass"""	student_assessment
+SELECT candidate_id  FROM candidate_assessments  WHERE asessment_outcome_code = 'Pass'	student_assessment
+"SELECT people.cell_mobile_number FROM people JOIN candidate_assessments ON people.person_id = candidate_assessments.candidate_id WHERE candidate_assessments.asessment_outcome_code = ""Fail"""	student_assessment
+"SELECT people.""cell mobile number"" FROM people JOIN candidate_assessments ON people.""person id"" = candidate_assessments.""candidate id"" WHERE candidate_assessments.""asessment outcome code"" = 'Fail'"	student_assessment
+SELECT student_id FROM student_course_registrations WHERE course_id = 301	student_assessment
+SELECT student_id FROM student_course_registrations WHERE course_id = 301	student_assessment
+SELECT student_id  FROM student_course_registrations  WHERE course_id = 301  ORDER BY registration_date DESC  LIMIT 1	student_assessment
+SELECT student_id  FROM student_course_registrations  WHERE course_id = 301  ORDER BY registration_date DESC	student_assessment
+SELECT DISTINCT city FROM addresses WHERE address_id IN (SELECT address_id FROM people_addresses)	student_assessment
+SELECT DISTINCT city FROM addresses	student_assessment
+SELECT DISTINCT city  FROM addresses  WHERE address_id IN (SELECT address_id FROM people_addresses WHERE person_id IN (SELECT person_id FROM students))	student_assessment
+SELECT DISTINCT city FROM addresses WHERE address_id IN (SELECT address_id FROM people_addresses WHERE person_id IN (SELECT person_id FROM students))	student_assessment
+SELECT course_name FROM courses ORDER BY course_name ASC	student_assessment
+SELECT course_name FROM courses ORDER BY course_name ASC	student_assessment
+SELECT `first name` FROM people ORDER BY `first name` ASC	student_assessment
+SELECT `first name` FROM people ORDER BY `first name` ASC	student_assessment
+"SELECT DISTINCT ""student id"" FROM ""student course registrations"" UNION SELECT DISTINCT ""student id"" FROM ""student course attendance"""	student_assessment

@@ -1,0 +1,46 @@
+SELECT COUNT(*) FROM head WHERE age > 56;	department_management
+SELECT head.name, head.born_state, head.age FROM head ORDER BY head.age;	department_management
+SELECT creation, name, `budget in billions` FROM department	department_management
+SELECT MAX(`budget in billions`), MIN(`budget in billions`) FROM department	department_management
+SELECT AVG(`num employees`) FROM department WHERE ranking BETWEEN 10 AND 15;	department_management
+SELECT name FROM head WHERE born_state != 'California'	department_management
+"SELECT DISTINCT department.creation 
+FROM department 
+JOIN management ON department.department_id = management.department_id 
+JOIN head ON management.head_id = head.head_id 
+WHERE head.born_state = 'Alabama'"	department_management
+SELECT born_state FROM head GROUP BY born_state HAVING COUNT(*) >= 3;	department_management
+SELECT creation, COUNT(*) FROM department GROUP BY creation ORDER BY COUNT(*) DESC LIMIT 1;	department_management
+"SELECT department.name, department.num_employees 
+FROM department 
+JOIN management ON department.department_id = management.department_id 
+JOIN head ON management.head_id = head.head_id 
+WHERE management.temporary_acting = 'Yes';"	department_management
+SELECT COUNT(*) FROM management;	department_management
+SELECT COUNT(*) FROM department WHERE department_id NOT IN (SELECT department_id FROM management)	department_management
+SELECT DISTINCT head.age FROM head JOIN management ON head.head_id = management.head_id WHERE management.temporary_acting = 'yes';	department_management
+"SELECT h.born_state 
+FROM department d 
+JOIN management m ON d.department_id = m.department_id 
+JOIN head h ON m.head_id = h.head_id 
+WHERE d.name IN ('Treasury', 'Homeland Security')"	department_management
+"SELECT department.id, department.name, COUNT(management.head_id) 
+FROM department 
+JOIN management ON department.id = management.department_id 
+GROUP BY department.id, department.name 
+HAVING COUNT(DISTINCT management.head_id) > 1;"	department_management
+SELECT head.id, head.name FROM head WHERE head.name LIKE '%Ha%'	department_management
+SELECT COUNT(*) FROM farm	farm
+SELECT COUNT(*) FROM farm	farm
+SELECT `total horses` FROM farm ORDER BY `total horses` ASC;	farm
+SELECT `farm id`, SUM(`total horses`) FROM farm GROUP BY `farm id` ORDER BY SUM(`total horses`) ASC	farm
+"SELECT hosts FROM farm_competition WHERE theme != ""Aliens"""	farm
+SELECT hosts FROM farm_competition WHERE theme != 'Aliens'	farm
+SELECT theme, year FROM farm_competition ORDER BY year ASC	farm
+SELECT theme FROM farm_competition ORDER BY year ASC	farm
+SELECT AVG(`Working_Horses`) FROM farm WHERE `Total_Horses` > 5000;	farm
+SELECT AVG(`Working_Horses`) FROM `farm` WHERE `Total_Horses` > 5000	farm
+SELECT MAX(cows), MIN(cows) FROM farm;	farm
+SELECT MAX(cows), MIN(cows) FROM farm	farm
+SELECT COUNT(DISTINCT status) FROM city;	farm
+SELECT COUNT(DISTINCT status) FROM city	farm
